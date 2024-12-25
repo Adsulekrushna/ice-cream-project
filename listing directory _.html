@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://127.0.0.1:5500/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>listing directory /</title>
+    <style>* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+body {
+  padding: 80px 100px;
+  font: 13px "Helvetica Neue", "Lucida Grande", "Arial";
+  background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));
+  background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);
+  background-repeat: no-repeat;
+  color: #555;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+  font-size: 22px;
+  color: #343434;
+}
+h1 em, h2 em {
+  padding: 0 5px;
+  font-weight: normal;
+}
+h1 {
+  font-size: 60px;
+}
+h2 {
+  margin-top: 10px;
+}
+h3 {
+  margin: 5px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+ul li {
+  list-style: none;
+}
+ul li:hover {
+  cursor: pointer;
+  color: #2e2e2e;
+}
+ul li .path {
+  padding-left: 5px;
+  font-weight: bold;
+}
+ul li .line {
+  padding-right: 5px;
+  font-style: italic;
+}
+ul li:first-child .path {
+  padding-left: 0;
+}
+p {
+  line-height: 1.5;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  color: #303030;
+}
+#stacktrace {
+  margin-top: 15px;
+}
+.directory h1 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+ul#files {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+ul#files li {
+  float: left;
+  width: 30%;
+  line-height: 25px;
+  margin: 1px;
+}
+ul#files li a {
+  display: block;
+  height: 25px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+ul#files li a:focus,
+ul#files li a:hover {
+  background: rgba(255,255,255,0.65);
+  border: 1px solid #ececec;
+}
+ul#files li a.highlight {
+  -webkit-transition: background .4s ease-in-out;
+  background: #ffff4f;
+  border-color: #E9DC51;
+}
+#search {
+  display: block;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 90px;
+  -webkit-transition: width ease 0.2s, opacity ease 0.4s;
+  -moz-transition: width ease 0.2s, opacity ease 0.4s;
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -moz-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+  font: 13px "Helvetica Neue", Arial, sans-serif;
+  padding: 4px 10px;
+  border: none;
+  background: transparent;
+  margin-bottom: 0;
+  outline: none;
+  opacity: 0.7;
+  color: #888;
+}
+#search:focus {
+  width: 120px;
+  opacity: 1.0; 
+}
+
+/*views*/
+#files span {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-indent: 10px;
+}
+#files .name {
+  background-repeat: no-repeat;
+}
+#files .icon .name {
+  text-indent: 28px;
+}
+
+/*tiles*/
+.view-tiles .name {
+  width: 100%;
+  background-position: 8px 5px;
+}
+.view-tiles .size,
+.view-tiles .date {
+  display: none;
+}
+
+/*details*/
+ul#files.view-details li {
+  float: none;
+  display: block;
+  width: 90%;
+}
+ul#files.view-details li.header {
+  height: 25px;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+}
+.view-details .header {
+  border-radius: 5px;
+}
+.view-details .name {
+  width: 60%;
+  background-position: 8px 5px;
+}
+.view-details .size {
+  width: 10%;
+}
+.view-details .date {
+  width: 30%;
+}
+.view-details .size,
+.view-details .date {
+  text-align: right;
+  direction: rtl;
+}
+
+/*mobile*/
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0;
+  }
+  #search {
+    position: static;
+    width: 100%;
+    font-size: 2em;
+    line-height: 1.8em;
+    text-indent: 10px;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 0;
+    margin: 0;
+  }
+  #search:focus {
+    width: 100%;
+    border: 0;
+    opacity: 1;
+  }
+  .directory h1 {
+    font-size: 2em;
+    line-height: 1.5em;
+    color: #fff;
+    background: #000;
+    padding: 15px 10px;
+    margin: 0;
+  }
+  ul#files {
+    border-top: 1px solid #cacaca;
+  }
+  ul#files li {
+    float: none;
+    width: auto !important;
+    display: block;
+    border-bottom: 1px solid #cacaca;
+    font-size: 2em;
+    line-height: 1.2em;
+    text-indent: 0;
+    margin: 0;
+  }
+  ul#files li:nth-child(odd) {
+    background: #e0e0e0;
+  }
+  ul#files li a {
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    padding: 15px 10px;
+  }
+  ul#files li a:focus,
+  ul#files li a:hover {
+    border: 0;
+  }
+  #files .header,
+  #files .size,
+  #files .date {
+    display: none !important;
+  }
+  #files .name {
+    float: none;
+    display: inline-block;
+    width: 100%;
+    text-indent: 0;
+    background-position: 0 50%;
+  }
+  #files .icon .name {
+    text-indent: 41px;
+  }
+}
+#files .icon-image .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGWSURBVBgZpcE/a1NhGMbh3/OeN56cKq2Dp6AoCOKmk4uCn8DNycEOIojilr2TaBfRzVnESQR3Bz+FFDoWA2IjtkRqmpyc97k9qYl/IQV7XSaJw4g0VlZfP0m13dwepPbuiH85fyhyWCx4/ubxjU6kkdxWHt69VC6XpZlFBAhwJgwJJHAmRKorbj94ewvoRBrbuykvT5R2/+lLTp05Tp45STmEJYJBMAjByILxYeM9jzr3GCczGpHGYAQhRM6fO8uFy1fJQoaUwCKYEcwwC4QQaGUBd36KTDmQ523axTGQmEcIEBORKQfG1ZDxcA/MkBxXwj1ggCQyS9TVAMmZiUxJ8Ln/kS+9PmOvcSW+jrao0mmMH5bzHfa+9UGBmciUBJ+2Fmh1h+yTQCXSkJkdCrpd8btIwwEJQnaEkOXMk7XaiF8CUxL/JdKQOwb0Ntc5SG9zHXQNd/ZFGsaEeLa2ChjzXQcqZiKNxSL0vR4unVwwMENMCATib0ZdV+QtE41I42geXt1Ze3dlMNZFdw6Ut6CIvKBhkjiM79Pyq1YUmtkKAAAAAElFTkSuQmCC);
+}
+#files .icon-text-html .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHtSURBVDjLjZM9T9tQFIYpQ5eOMBKlW6eWIQipa8RfQKQghEAKqZgKFQgmFn5AWyVDCipVQZC2EqBWlEqdO2RCpAssQBRsx1+1ndix8wFvfW6wcUhQsfTI0j33PD7n+N4uAF2E+/S5RFwG/8Njl24/LyCIOI6j1+v1y0ajgU64cSSTybdBSVAwSMmmacKyLB/DMKBpGkRRZBJBEJBKpXyJl/yABLTBtm1Uq1X2JsrlMnRdhyRJTFCpVEAfSafTTUlQoFs1luxBAkoolUqQZbmtJTYTT/AoHInOfpcwtVtkwcSBgrkDGYph+60oisIq4Xm+VfB0+U/P0Lvj3NwPGfHPTcHMvoyFXwpe7UmQtAqTUCU0D1VVbwTPVk5jY19Fe3ZfQny7CE51WJDXqpjeEUHr45ki9rIqa4dmQiJfMLItGEs/FcQ2ucbRmdnSYy5vYWyLx/w3EaMfLmBaDpMQvuDJ65PY8Dpnz3wpYmLtApzcrIAqmfrEgdZH1grY/a36w6Xz0DKD8ES25/niYS6+wWE8mWfByY8cXmYEJFYLkHUHtVqNQcltAvoLD3v7o/FUHsNvzlnwxfsCEukC/ho3yUHaBN5Buo17Ojtyl+DqrnvQgUtfcC0ZcAdkUeA+ye7eMru9AUGIJPe4zh509UP/AAfNypi8oj/mAAAAAElFTkSuQmCC);
+}
+#files .icon-default .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC4SURBVCjPdZFbDsIgEEWnrsMm7oGGfZrohxvU+Iq1TyjU60Bf1pac4Yc5YS4ZAtGWBMk/drQBOVwJlZrWYkLhsB8UV9K0BUrPGy9cWbng2CtEEUmLGppPjRwpbixUKHBiZRS0p+ZGhvs4irNEvWD8heHpbsyDXznPhYFOyTjJc13olIqzZCHBouE0FRMUjA+s1gTjaRgVFpqRwC8mfoXPPEVPS7LbRaJL2y7bOifRCTEli3U7BMWgLzKlW/CuebZPAAAAAElFTkSuQmCC);
+}
+</style>
+    <script>
+      function $(id){
+        var el = 'string' == typeof id
+          ? document.getElementById(id)
+          : id;
+
+        el.on = function(event, fn){
+          if ('content loaded' == event) {
+            event = window.attachEvent ? "load" : "DOMContentLoaded";
+          }
+          el.addEventListener
+            ? el.addEventListener(event, fn, false)
+            : el.attachEvent("on" + event, fn);
+        };
+
+        el.all = function(selector){
+          return $(el.querySelectorAll(selector));
+        };
+
+        el.each = function(fn){
+          for (var i = 0, len = el.length; i < len; ++i) {
+            fn($(el[i]), i);
+          }
+        };
+
+        el.getClasses = function(){
+          return this.getAttribute('class').split(/\s+/);
+        };
+
+        el.addClass = function(name){
+          var classes = this.getAttribute('class');
+          el.setAttribute('class', classes
+            ? classes + ' ' + name
+            : name);
+        };
+
+        el.removeClass = function(name){
+          var classes = this.getClasses().filter(function(curr){
+            return curr != name;
+          });
+          this.setAttribute('class', classes.join(' '));
+        };
+
+        return el;
+      }
+
+      function search() {
+        var str = $('search').value.toLowerCase();
+        var links = $('files').all('a');
+
+        links.each(function(link){
+          var text = link.textContent.toLowerCase();
+
+          if ('..' == text) return;
+          if (str.length && ~text.indexOf(str)) {
+            link.addClass('highlight');
+          } else {
+            link.removeClass('highlight');
+          }
+        });
+      }
+
+      $(window).on('content loaded', function(){
+        $('search').on('keyup', search);
+      });
+    </script>
+  </head>
+  <body class="directory">
+    <input id="search" type="text" placeholder="Search" autocomplete="off">
+    <div id="wrapper">
+      <h1><a href="http://127.0.0.1:5500/">~</a> / </h1>
+      <ul id="files" class="view-tiles"><li><a href="http://127.0.0.1:5500/29c9782a8da294f0d96f82d9bb276f65.jpg" class="icon icon icon-jpg icon-image" title="29c9782a8da294f0d96f82d9bb276f65.jpg"><span class="name">29c9782a8da294f0d96f82d9bb276f65.jpg</span><span class="size">29401</span><span class="date">12/2/2024 6:33:21 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/amul-ice-cream-logo-image-1-1024x576.png" class="icon icon icon-png icon-image" title="amul-ice-cream-logo-image-1-1024x576.png"><span class="name">amul-ice-cream-logo-image-1-1024x576.png</span><span class="size">424096</span><span class="date">12/2/2024 7:22:13 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/Amul%E2%80%99s-new-ice-cream-%E2%80%98IsabCool%E2%80%99-finds-%E2%80%98Kabz-Main-Avsar%E2%80%99-1.jpg" class="icon icon icon-jpg icon-image" title="Amul’s-new-ice-cream-‘IsabCool’-finds-‘Kabz-Main-Avsar’-1.jpg"><span class="name">Amul’s-new-ice-cream-‘IsabCool’-finds-‘Kabz-Main-Avsar’-1.jpg</span><span class="size">73223</span><span class="date">12/2/2024 7:01:28 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/bostrap%20Side2.html" class="icon icon icon-html icon-text-html" title="bostrap Side2.html"><span class="name">bostrap Side2.html</span><span class="size">24386</span><span class="date">12/4/2024 8:01:23 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/bostrapdemo.html" class="icon icon icon-html icon-text-html" title="bostrapdemo.html"><span class="name">bostrapdemo.html</span><span class="size">20332</span><span class="date">12/4/2024 6:59:50 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/D042EGuWkAAZlJL.jpg" class="icon icon icon-jpg icon-image" title="D042EGuWkAAZlJL.jpg"><span class="name">D042EGuWkAAZlJL.jpg</span><span class="size">108022</span><span class="date">12/2/2024 7:10:35 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/download%20ic.jpg" class="icon icon icon-jpg icon-image" title="download ic.jpg"><span class="name">download ic.jpg</span><span class="size">15526</span><span class="date">12/1/2024 3:16:19 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/downloadic.jpg" class="icon icon icon-jpg icon-image" title="downloadic.jpg"><span class="name">downloadic.jpg</span><span class="size">9425</span><span class="date">12/2/2024 6:37:22 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/f05764a2a309d1a5544091fc38f34117.jpg" class="icon icon icon-jpg icon-image" title="f05764a2a309d1a5544091fc38f34117.jpg"><span class="name">f05764a2a309d1a5544091fc38f34117.jpg</span><span class="size">4986</span><span class="date">12/1/2024 3:32:31 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/footer%20creater.html" class="icon icon icon-html icon-text-html" title="footer creater.html"><span class="name">footer creater.html</span><span class="size">7216</span><span class="date">12/3/2024 8:58:04 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/ice%20%20cream%20shop.code-workspace" class="icon icon icon-code-workspace icon-default" title="ice  cream shop.code-workspace"><span class="name">ice  cream shop.code-workspace</span><span class="size">160</span><span class="date">12/4/2024 1:24:21 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/ice%20shop%20.html" class="icon icon icon-html icon-text-html" title="ice shop .html"><span class="name">ice shop .html</span><span class="size">6955</span><span class="date">12/3/2024 8:40:41 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/images%20(6).jpg" class="icon icon icon-jpg icon-image" title="images (6).jpg"><span class="name">images (6).jpg</span><span class="size">10511</span><span class="date">12/3/2024 12:13:02 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/images%20(8).jpg" class="icon icon icon-jpg icon-image" title="images (8).jpg"><span class="name">images (8).jpg</span><span class="size">7364</span><span class="date">12/3/2024 12:10:08 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/images%207.jpg" class="icon icon icon-jpg icon-image" title="images 7.jpg"><span class="name">images 7.jpg</span><span class="size">3023</span><span class="date">12/3/2024 12:07:37 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/images%20ice%203.jpg" class="icon icon icon-jpg icon-image" title="images ice 3.jpg"><span class="name">images ice 3.jpg</span><span class="size">12275</span><span class="date">12/1/2024 3:18:38 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/images.jpg" class="icon icon icon-jpg icon-image" title="images.jpg"><span class="name">images.jpg</span><span class="size">7374</span><span class="date">12/2/2024 6:39:50 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/OIP%20(1).jpg" class="icon icon icon-jpg icon-image" title="OIP (1).jpg"><span class="name">OIP (1).jpg</span><span class="size">9728</span><span class="date">12/2/2024 6:51:29 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/OIP%20(2).jpg" class="icon icon icon-jpg icon-image" title="OIP (2).jpg"><span class="name">OIP (2).jpg</span><span class="size">15845</span><span class="date">12/2/2024 6:55:57 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/OIP%20(3).jpg" class="icon icon icon-jpg icon-image" title="OIP (3).jpg"><span class="name">OIP (3).jpg</span><span class="size">24818</span><span class="date">12/2/2024 6:59:55 PM</span></a></li>
+<li><a href="http://127.0.0.1:5500/OIP.jpg" class="icon icon icon-jpg icon-image" title="OIP.jpg"><span class="name">OIP.jpg</span><span class="size">22853</span><span class="date">12/2/2024 6:49:06 PM</span></a></li></ul>
+    </div>
+  
+</body></html>
